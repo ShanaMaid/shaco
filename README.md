@@ -7,6 +7,9 @@
 
 当你更新数据的时候，shaco将会自动刷新视图，它比`jQuery`的`html()`花费更少的时间!
 
+## Show
+![](./screenshot/2.gif)
+
 ## Live Demos
 [中文](https://blog.shanamaid.top/shaco/index.html)
 
