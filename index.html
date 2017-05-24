@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>shaco</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div style="max-width: 400px;margin: 0 auto;">
+    <span>中文</span>
+    <a href="./index-en.html">English</a><br/>
+    <div style="margin-bottom: 20px;">
+      你可以在控制台输入<br/>
+      shaco.$data.one.time  = `YYYYYYY`;<br/>
+      shaco.$data.one.username  = `ZZZZZZZZZ`;<br/>
+      shaco.$data.one.content  = `XXXXXXXXXXXX`;<br/>
+      来直接改变视图，不信你按`F12`在console中输入试试？<br/>
+    </div>
+    <button onclick="auto()">shaco渲染</button>
+    <div id="app" style="margin-bottom: 50px;">
+      <div>
+        <div>Shaco</div>
+        <div>时间是{{one.time}} 名字是{{one.username}}</div>
+        <div>内容是{{one.content}}</div>
+      </div>
+    </div>
+
+    <button onclick="update()">jquery html渲染</button>
+    <div id="target" style="margin-bottom: 50px;">
+    </div>
+    
+
+    <div id="app2" style="margin-bottom: 50px;">
+      <p>显示：{{value}}</p>
+      输入：<input type="text" oninput="input(this)">
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="./dist/shaco.min.js"></script>
+<script type="text/javascript">
+  var data1 = {
+    time: '2017-01-01 11:21:21',
+    username: '测试',
+    content: '今天吃什么'
+  }
+
+  var data2 = {
+    time: '2017-02-02 12:11:11',
+    username: '测试2',
+    content: '今天什么都不吃'
+  }
+
+  var shaco = new Shaco({
+    el: '#app',
+    data: {
+      one: data1
+    }
+  });
+
+
+  function auto (){
+    shaco.$data.one = data2;
+  }
+
+  var msg = '<div>'
+            + '<div>jquery html()</div>'
+            + '<div>时间是{{time}} 名字是{{username}}</div>' 
+            + '<div>内容是{{content}}</div>'
+            + '</div>';
+  $(document).ready(function () {
+    var html = msg.replace(/\{\{time\}\}/, data1.time);
+    html = html.replace(/\{\{username\}\}/, data1.username);
+    html = html.replace(/\{\{content\}\}/, data1.content);
+
+    $('#target').html(html);
+  })
+
+  function update () {
+    var html = msg.replace(/\{\{time\}\}/, data2.time);
+    html = html.replace(/\{\{username\}\}/, data2.username);
+    html = html.replace(/\{\{content\}\}/, data2.content);
+    $('#target').html(html);
+  }
+
+  var shaco2 = new Shaco({
+    el: '#app2',
+    data: {
+      value: ''
+    }
+  });
+  function input (e) {
+    shaco2.$data.value = e.value;
+  }
+</script>
+</html>
